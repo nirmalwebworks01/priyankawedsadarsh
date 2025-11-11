@@ -1,3 +1,12 @@
+// --- NEW PRELOADER LOGIC ---
+const preloader = document.getElementById('preloader');
+
+window.onload = function() {
+    // This hides the loader once all assets (images, video, etc.) are loaded
+    preloader.classList.add('hidden');
+}
+// --- END PRELOADER LOGIC ---
+
 // --- CONFIGURATION ---
 let isMusicMuted = false;
 
@@ -16,6 +25,7 @@ const nextButton = document.getElementById('next-page-button');
 const backToVideoButton = document.getElementById('back-to-video-button');
 const muteVideoScreenButton = document.getElementById('mute-unmute-video-screen');
 const muteMainContentButton = document.getElementById('mute-unmute-main-content');
+
 const backToEntranceButton = document.getElementById('back-to-entrance-button');
 
 // --- INITIAL SETUP ---
@@ -26,26 +36,39 @@ if (backToEntranceButton) {
 
 // --- CORE NAVIGATION FUNCTIONS ---
 
-// P1 -> P2 (FIXED VERSION)
+// P1 -> P2 (MODIFIED with NEW exit animation)
 function navigateToVideoPage() {
-    entranceScreen.classList.add('hidden');
-    videoScreen.style.display = 'flex'; 
+    // --- NEW ANIMATION PART ---
+    const elementsToAnimate = [
+        entranceScreen.querySelector('h1'),
+        entranceScreen.querySelector('p'),
+        startButton,
+        entranceScreen.querySelector('img[src="Assets/front.gif"]')
+    ];
+    elementsToAnimate.forEach(el => el && el.classList.add('exiting'));
+    // --- END NEW PART ---
 
+    // Delay the original navigation to let the new animation play
     setTimeout(() => {
-        videoScreen.classList.add('active');
-        mainContent.classList.remove('visible');
-        mainContent.style.position = 'absolute';
-    }, 100); 
+        entranceScreen.classList.add('hidden');
+        videoScreen.style.display = 'flex'; 
 
-    setTimeout(() => {
-        weddingVideo.style.display = 'block';
-        backgroundMusic.muted = isMusicMuted;
-        weddingVideo.muted = true; 
-        weddingVideo.currentTime = 0;
+        setTimeout(() => {
+            videoScreen.classList.add('active');
+            mainContent.classList.remove('visible');
+            mainContent.style.position = 'absolute';
+        }, 100); 
 
-        backgroundMusic.play().catch(error => console.log("Music autoplay failed:", error));
-        weddingVideo.play().catch(error => console.log("Video autoplay failed:", error));
-    }, 100); 
+        setTimeout(() => {
+            weddingVideo.style.display = 'block';
+            backgroundMusic.muted = isMusicMuted;
+            weddingVideo.muted = true; 
+            weddingVideo.currentTime = 0;
+
+            backgroundMusic.play().catch(error => console.log("Music autoplay failed:", error));
+            weddingVideo.play().catch(error => console.log("Video autoplay failed:", error));
+        }, 100); 
+    }, 500); // 500ms matches the animation duration
 }
 
 // P2 -> P3
@@ -78,7 +101,7 @@ function navigateBackToVideo() {
     }, 100);
 }
 
-// P2 -> P1
+// P2 -> P1 (MODIFIED to reset P1 animations)
 function navigateBackToEntrance() {
     backgroundMusic.pause();
     weddingVideo.pause();
@@ -88,6 +111,16 @@ function navigateBackToEntrance() {
         videoScreen.style.display = 'none';
         entranceScreen.classList.remove('hidden');
         body.classList.add('no-scroll');
+
+        // --- NEW: Reset elements on P1 ---
+        const elementsToAnimate = [
+            entranceScreen.querySelector('h1'),
+            entranceScreen.querySelector('p'),
+            startButton,
+            entranceScreen.querySelector('img[src="Assets/front.gif"]')
+        ];
+        elementsToAnimate.forEach(el => el && el.classList.remove('exiting'));
+        // --- END NEW ---
     }, 1000); 
 }
 

@@ -5,11 +5,9 @@
     --dark-text: #333;
     --light-text: #fff;
     --accent-gold: #d4af37;
-    /* Button colors from the reference image */
     --ref-button-bg: #8c0f5f; 
     --ref-button-hover-bg: #6a0b49;
     --ref-button-text: #fff; 
-    /* Moved footer colors here for consistency */
     --footer-text: rgb(224, 122, 139);
     --copyright-text: #000;
 }
@@ -37,7 +35,59 @@ body.no-scroll {
     height: 100vh;
 }
 
-/* NEW: Universal button style (large) */
+/* --- PRELOADER STYLES --- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-pink);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.75s ease, visibility 0.75s ease;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+   width: 50px;
+   aspect-ratio: 1;
+   display: grid;
+   border: 4px solid #0000;
+   border-radius: 50%;
+   border-color: var(--secondary-pink) #0000; 
+   animation: l16 1s infinite linear;
+}
+.loader::before,
+.loader::after { 	
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+}
+.loader::before {
+  border-color: var(--ref-button-bg) #0000; 
+  animation: inherit; 
+  animation-duration: .5s;
+  animation-direction: reverse;
+}
+.loader::after {
+  margin: 8px;
+}
+@keyframes l16 { 	
+  100%{transform: rotate(1turn)}
+}
+/* --- END PRELOADER STYLES --- */
+
+
+/* Universal button style (large) */
 .custom-button-style {
     background: var(--ref-button-bg);
     color: var(--ref-button-text); 
@@ -97,7 +147,7 @@ body.no-scroll {
     font-size: 80px;
     color: var(--dark-text);
     margin-bottom: 20px;
-    animation: fadeIn 2s ease-out;
+    animation: fadeIn 2s ease-out, float 3s ease-in-out 2s infinite alternate;
     position: relative; 
     z-index: 2000;
 }
@@ -113,6 +163,11 @@ body.no-scroll {
 
 #start-button {
     animation: pulse 1.5s infinite alternate;
+}
+
+/* Class to trigger exit animation */
+#entrance-screen .exiting {
+    animation: fadeOutZoom 0.5s forwards ease-in;
 }
 
 /* --- PAGE 2: VIDEO SCREEN STYLES --- */
@@ -149,7 +204,6 @@ body.no-scroll {
     z-index: 999; 
 }
 
-/* Video Controls Container (Holds next button and floating controls) */
 .video-controls {
     position: relative; 
     width: 100%;
@@ -161,7 +215,10 @@ body.no-scroll {
     box-sizing: border-box;
 }
 
-/* NEW: Floating Controls container for P2 (Same style as P3 controls) */
+#next-page-button {
+    animation: pulse 1.5s infinite alternate;
+}
+
 .page2-controls {
     position: fixed;
     top: 15px;
@@ -224,7 +281,7 @@ body.no-scroll {
 
 header {
     position: relative;
-    background-image: url('Assets/flower.png'); 
+    background-image: url('Assets/flower.gif'); /* <-- CHANGED to flower.gif */
     background-size: cover;
     background-position: center;
     color: black;
@@ -234,9 +291,22 @@ header {
     animation-delay: 0.5s;
 }
 
+/* NEW: PNG overlay for header */
+.header-top-image {
+    position: absolute;
+    top: 0;
+    left: 0; 
+    width: 100%; 
+    max-width: none; 
+    height: auto;
+    z-index: 1; /* Below header text (2) but above bg (0) */
+    pointer-events: none; 
+    opacity: 0.8; 
+}
+
 header * {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Keeps text above the new header image */
 }
 
 header h1 {
@@ -247,6 +317,7 @@ header h1 {
     text-shadow: 2px 2px 4px rgba(255, 0, 0, 0.4);
     letter-spacing: 2px;
     color: black;
+    /* animation: float 3s ease-in-out 3s infinite alternate; <-- REMOVED */
 }
 
 header p {
@@ -263,21 +334,18 @@ header p strong {
     color: rgb(163, 29, 29);
 }
 
-/* --- UPDATED: Styling for Logwork Timer --- */
-
-/* NEW: Text above countdown timer */
 .countdown-text {
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px; /* You can change this size! */
+    font-size: 18px; 
     font-weight: 400;
     color: var(--dark-text);
-    margin: 0px 20px -20px 20px; /* Adds space above and below */
+    margin: 0px 20px -20px 20px; 
 }
 
 .countdown-timer {
     display: block;
-    margin: 0 0 30px 0; /* Removed top margin, kept bottom */
-    pointer-events: none; /* This makes it unclickable */
+    margin: 0 0 30px 0; 
+    pointer-events: none; 
 }
 
 section {
@@ -307,30 +375,28 @@ h2::after {
     left: 50%;
     transform: translateX(-50%);
     bottom: -10px;
-    width: 80px;
+    width: 100px;
     height: 2px;
     background: var(--accent-gold);
     border-radius: 5px;
+    animation: pulse-line 2s ease-in-out infinite alternate;
 }
 
-/* --- NEW: Carousel Styles --- */
 .carousel {
-    max-width: 500px; /* Adjust max width as you like */
-    margin: 0 auto 40px auto; /* Center it and add space below */
+    max-width: 500px; 
+    margin: 0 auto 40px auto; 
     border: 4px solid var(--secondary-pink);
     border-radius: 15px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    overflow: hidden; /* Important for rounded corners */
+    overflow: hidden; 
 }
 
 .carousel-item img {
-    /* This creates a nice square, consistent look */
     height: 500px; 
     object-fit: cover;
-    border-radius: 11px; /* (15px border - 4px radius) */
+    border-radius: 11px; 
 }
 
-/* --- SCHEDULE & VENUE --- */
 .schedule, .venue {
     max-width: 700px;
     margin: 0 auto;
@@ -363,21 +429,16 @@ iframe {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* --- FOOTER STYLES (MODIFIED) --- */
 footer {
-    position: relative; /* <-- ADDED */
-    overflow: hidden; /* <-- ADDED */
-    
-    /* --- Background GIF Added --- */
-    background-image: url('Assets/footer.gif');
+    position: relative; 
+    overflow: hidden; 
+    background-image: url('Assets/footer.gif'); 
     background-size: cover;
     background-position: center;
-    background-color: var(--secondary-pink); /* Fallback color */
-    
+    background-color: var(--secondary-pink); 
     padding: 10px;
     padding-bottom: 30px;
     font-size: 16px;
-    /* Using CSS Variable */
     color: var(--footer-text);
     font-weight: 300;
     letter-spacing: 1px;
@@ -387,7 +448,6 @@ footer {
     animation-delay: 0.5s;
 }
 
-/* --- NEW: Pulls text on top of overlay --- */
 footer * {
     position: relative;
     z-index: 2;
@@ -400,17 +460,20 @@ footer p {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-/* --- NEW: ORIENTATION LOCK STYLES --- */
+footer p:first-child {
+    animation: text-glow 2s ease-in-out infinite alternate;
+}
+
 #orientation-lock {
-    display: none; /* Hidden by default in portrait mode */
+    display: none; 
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: var(--primary-pink); /* Use your theme color */
+    background: var(--primary-pink); 
     color: var(--dark-text);
-    z-index: 9999; /* On top of everything */
+    z-index: 9999; 
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -429,7 +492,7 @@ footer p {
 #orientation-lock h2 {
     font-family: 'Dancing Script', cursive;
     font-size: 36px;
-    color: var(--ref-button-bg); /* Use your theme button color */
+    color: var(--ref-button-bg); 
     margin: 0 0 15px 0;
 }
 
@@ -438,26 +501,76 @@ footer p {
     line-height: 1.5;
 }
 
-/* Keyframes for the rotate icon */
+/* --- KEYFRAMES --- */
 @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
 
+@keyframes fadeOutZoom {
+    from { 
+        opacity: 1; 
+        transform: scale(1); 
+    }
+    to { 
+        opacity: 0; 
+        transform: scale(0.8); 
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes float {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-10px); 
+    }
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    to {
+        transform: scale(1.05); 
+        box-shadow: 0 6px 15px rgba(140, 15, 95, 0.4); 
+    }
+}
+
+@keyframes pulse-line {
+    from {
+        transform: translateX(-50%) scaleX(1);
+    }
+    to {
+        transform: translateX(-50%) scaleX(1.2);
+    }
+}
+
+@keyframes text-glow {
+    from {
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+    to {
+        text-shadow: 1px 1px 10px rgba(224, 122, 139, 0.7);
+    }
+}
 
 /* --- RESPONSIVE DESIGN --- */
 
-/* NEW: Landscape Orientation Lock */
 @media (orientation: landscape) {
     #orientation-lock {
-        display: flex; /* Show the lock screen */
+        display: flex; 
     }
-
-    /* Hide all main page components */
     #entrance-screen, 
     #video-screen, 
     #main-content {
-        display: none !important; /* Hide the invitation */
+        display: none !important; 
     }
 }
 
@@ -468,7 +581,6 @@ footer p {
     h2 { font-size: 38px; }
     .page2-controls, .page3-controls { top: 10px; right: 10px; }
 
-    /* ADDED: Carousel responsive */
     .carousel, .carousel-item img {
         max-width: 350px;
         height: 350px;
@@ -494,7 +606,6 @@ footer p {
         font-size: 18px;
     }
 
-    /* ADDED: Carousel responsive */
     .carousel, .carousel-item img {
         max-width: 280px;
         height: 280px;

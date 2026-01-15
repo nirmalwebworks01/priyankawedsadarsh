@@ -1,176 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nirmal & Kiara's Wedding Invitation</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sidharth & Kiara's Wedding Invitation</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="preload" href="Assets/png1.png" as="image">
-    <link rel="preload" href="Assets/eng1.jpg" as="image">
-    <link rel="preload" href="Assets/Kudmayi.mp3" as="audio">
-    <link rel="preload" href="Assets/Video.mp4" as="video">
     <link rel="preload" href="Assets/flower.gif" as="image">
-    <link rel="preload" href="Assets/footer.gif" as="image">
+    <link rel="preload" href="Assets/hand.avif" as="image" fetchpriority="high">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <link rel="stylesheet" href="style.css">
 
     <link rel="icon" type="image/png" href="Assets/favicon.png">
-    
+
 </head>
+
 <body>
 
     <div id="preloader">
         <div class="loader"></div>
     </div>
-    
-    <div id="orientation-lock">
-        <div id="orientation-lock-icon">🔄</div>
-        <h2>Please Rotate Your Device</h2>
-        <p>This invitation is best viewed in portrait mode.</p>
-    </div>
-    
+
+
     <audio id="background-music" loop>
         <source id="music-source-mp3" src="Assets/Kudmayi.mp3" type="audio/mpeg">
         <source id="music-source-ogg" src="Assets/Kudmayi.ogg" type="audio/ogg">
         Your browser does not support the audio element.
     </audio>
 
-    <div id="entrance-screen">
+    <div id="entrance-screen" class="hero-section">
+        <canvas id="bg-canvas"></canvas>
         <img src="Assets/png1.png" alt="Decorative element" class="top-image">
-        
-        <h1 style="padding-top: 100px;">Nirmal & Kiara</h1>
-        
-        <p>A beautiful journey begins! <br><span style="font-size: 19px; font-weight: 400;"> Two souls, one heart, endless love.</span></p>
-        <button id="start-button" class="custom-button-style">Enter Our Celebration</button>
-        <br><br>
-        
-        <img style="width: 300px; max-width: 100%;" src="Assets/front.gif" alt="Animated couple">
+
+        <div class="hero-content">
+            <h1 class="hero-title">Sidharth <span>&</span> Kiara</h1>
+
+            <p class="subtitle"
+                style="text-transform: none; font-family: 'Montserrat', sans-serif; font-size: 1.25rem; margin-top: 20px; color: #444; font-weight: 500;">
+                A beautiful journey begins! <br>
+                <span style="font-size: 1.0625rem; font-weight: 400; font-family: 'Montserrat', sans-serif;">Two souls,
+                    one
+                    heart, endless love.</span>
+            </p>
+
+            <button id="start-button" class="luxury-btn">Enter Celebration</button>
+        </div>
+
+
     </div>
 
     <div id="video-screen">
         <video id="wedding-video" autoplay muted playsinline preload="auto">
-            <source id="video-source-mp4" src="Assets/Video.mp4" type="video/mp4">
-            <source id="video-source-webm" src="Assets/Video.webm" type="video/webm">
+            <!-- Desktop Video (Video2.mp4) for screens larger than 768px -->
+            <source src="Assets/Video2.mp4" type="video/mp4" media="(min-width: 768px)">
+            <!-- Mobile Video (Video.mp4) for screens smaller than 768px -->
+            <source src="Assets/Video.mp4" type="video/mp4" media="(max-width: 767px)">
+            <!-- Fallback for browsers that don't support media attribute on source (loads first one usually, or use JS to force) but modern browsers handle this -->
+            <source src="Assets/Video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
         <div class="page2-controls">
-            <button id="back-to-entrance-button" class="control-button" title="Go Back" aria-label="Go Back">←</button>
-            <button id="mute-unmute-video-screen" class="control-button" title="Mute Music" aria-label="Mute Music">🔊</button>
+            <button id="mute-unmute-video-screen" class="control-button" title="Mute Music" aria-label="Mute Music"><i
+                    class="fa-solid fa-volume-high"></i></button>
+            <!-- DEV TEMP -->
+            <!-- <button id="dev-skip-button" class="control-button" title="Skip Video (Dev)" aria-label="Skip Video"
+                style="background: rgba(255, 0, 0, 0.7); width: auto; padding: 0 15px; border-radius: 20px; font-size: 0.8rem; font-family: sans-serif;">Skip</button> -->
         </div>
 
-        <div class="video-controls">
-            <button id="next-page-button" class="custom-button-style">Join Us On Our Day</button>
-        </div>
     </div>
 
     <main class="main-content" id="main-content">
-        
+        <div id="scroll-hint-popup">Scroll Down to See More <i class="fa-solid fa-angles-down"></i></div>
+
         <div class="page3-controls">
-            <button id="back-to-video-button" class="control-button" title="Go Back" aria-label="Go Back">←</button>
-            <button id="mute-unmute-main-content" class="control-button" title="Mute Music" aria-label="Mute Music">🔊</button>
+            <button id="mute-unmute-main-content" class="control-button" title="Mute Music" aria-label="Mute Music"><i
+                    class="fa-solid fa-volume-high"></i></button>
         </div>
 
         <header>
             <img src="Assets/flower.png" alt="" class="header-top-image">
 
-            <h1>Nirmal Gupta <br>&<br> Kiara Gupta</h1>
-            <p>Together with our families we request the honor of your presence as we write our lives in marriage</p>
-            <p><strong>25 December 2025</strong></p>
-        </header>
-        
-        <p class="countdown-text">Save the date! Our happily ever after begins in!💖</p>
-        <script src="https://cdn.logwork.com/widget/countdown.js"></script><a href="https://logwork.com/countdown-timer" class="countdown-timer" data-timezone="Asia/Kolkata" data-date="2025-12-25 19:00" data-background="#8c0f5f" data-digitscolor="#ffffff">&nbsp;</a>
+            <div class="ganesh-section">
+                <img src="Assets/ganeshji.png" alt="Lord Ganesha" class="ganesh-img">
+                <p class="ganesh-text">|| Shree Ganeshay Namah ||</p>
+            </div>
 
-
-        <section class="gallery">
-            <h2>Our Journey</h2>
-            
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="Assets/eng1.jpg" class="d-block w-100" alt="Nirmal and Kiara smiling together">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Assets/eng2.jpg" class="d-block w-100" alt="A photo from our engagement ceremony">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Assets/eng3.jpg" class="d-block w-100" alt="Candid moment from a family gathering">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Assets/eng4.jpg" class="d-block w-100" alt="Nirmal and Kiara holding hands">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Assets/eng5.jpg" class="d-block w-100" alt="Celebrating a special occasion">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Assets/eng6.jpg" class="d-block w-100" alt="Our journey together">
-                    </div>
+            <div class="typewriter-wrapper">
+                <div class="typewriter-text">You are cordially invited along with your family to bless the wedding of
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+            </div>
+
+            <h1 class="hero-title">
+                Sidharth Gupta
+                <span class="parent-details">(S/o Mr. Sunil Gupta & Mrs. Rimma Gupta)</span>
+                <span class="separator-with">with</span>
+                Kiara Gupta
+                <span class="parent-details">(D/o Mr. Jagdeep Gupta & Mrs. Disha Gupta)</span>
+            </h1>
+            <div class="separator-with" style="font-size: 4rem;">on</div>
+            <div class="date-display">
+                <div class="date-side">APR</div>
+                <div class="date-center">15</div>
+                <div class="date-side">2026</div>
+            </div>
+            <div class="day-name">Wednesday</div>
+        </header>
+
+        <!-- Custom Countdown Section -->
+        <section class="custom-countdown-section">
+            <p class="countdown-text">We are starting the countdown</p>
+            <div class="heart-container">
+                <i class="fa-solid fa-heart big-heart"></i>
+                <i class="fa-solid fa-heart small-heart"></i>
+            </div>
+
+            <div id="countdown-timer" class="flip-clock-wrapper">
+                <!-- Days -->
+                <div class="flip-group">
+                    <div class="flip-digits">
+                        <div class="flip-card" id="day-ten">0</div>
+                        <div class="flip-card" id="day-one">0</div>
+                    </div>
+                    <div class="flip-label">Days</div>
+                </div>
+
+                <div class="flip-separator">:</div>
+
+                <!-- Hours -->
+                <div class="flip-group">
+                    <div class="flip-digits">
+                        <div class="flip-card" id="hour-ten">0</div>
+                        <div class="flip-card" id="hour-one">0</div>
+                    </div>
+                    <div class="flip-label">Hours</div>
+                </div>
+
+                <div class="flip-separator">:</div>
+
+                <!-- Minutes -->
+                <div class="flip-group">
+                    <div class="flip-digits">
+                        <div class="flip-card" id="min-ten">0</div>
+                        <div class="flip-card" id="min-one">0</div>
+                    </div>
+                    <div class="flip-label">Minutes</div>
+                </div>
+
+                <div class="flip-separator">:</div>
+
+                <!-- Seconds -->
+                <div class="flip-group">
+                    <div class="flip-digits">
+                        <div class="flip-card" id="sec-ten">0</div>
+                        <div class="flip-card" id="sec-one">0</div>
+                    </div>
+                    <div class="flip-label">Seconds</div>
+                </div>
             </div>
         </section>
 
-        <section class="schedule">
-            <h2>Event Schedule</h2>
-            <p><strong>Mehndi & Sangeet:</strong></p>
-            <p>07:00 PM onwards at Gol Bagicha Residence.</p>
-            <p style="font-size: 16px;">Sangeet under the stars-let's make it unforgettable.</p>
-            <br>
-            <p><strong>Wedding Ceremony:</strong></p>
-            <p>7:00 PM onwards at Sukhdeo Clarks Inn</p>
-            <p style="font-size: 16px;">Join us & bless us as we begin our new journey together.</p>
+        <!-- Couple Profiles Section -->
+        <section class="couple-profiles-section">
+            <h2>About Us</h2>
+            <p class="section-subtitle">Bride and Groom</p>
+
+            <div class="profiles-container">
+                <!-- Groom Profile -->
+                <div class="profile-card">
+                    <img src="Assets/image1.jpg" alt="Sidharth" class="profile-img">
+                    <div class="profile-overlay"></div>
+                    <div class="profile-info">
+                        <h3 class="profile-name">Sidharth</h3>
+                        <p class="profile-hashtags">#handsome #caring #ambitious #charming</p>
+                    </div>
+                </div>
+
+                <!-- Bride Profile -->
+                <div class="profile-card">
+                    <img src="Assets/image2.jpg" alt="Kiara" class="profile-img">
+                    <div class="profile-overlay"></div>
+                    <div class="profile-info">
+                        <h3 class="profile-name">Kiara</h3>
+                        <p class="profile-hashtags">#beautiful #adorable #outgoing #kindhearted</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section class="venue">
-            <h2>Our Wedding Venue</h2>
-            <p>Sukhdeo Clarks Inn, Gaya, Bihar</p>
-            
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3621.8932625623006!2d85.0358629!3d24.7991082!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f329ecaa45dbe7%3A0x1dd3ad1c2a4c3cf8!2sSukhdeo%20Clarks%20Inn!5e0!3m2!1sen!2sin!4v1762859451893!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <!-- Info Columns Container (Schedule & Venue) -->
+        <div class="info-columns">
+            <section class="schedule">
+                <h2>Event Schedule</h2>
+                <p><strong>Mehndi & Sangeet:</strong></p>
+                <p>07:00 PM onwards at Gol Bagicha Residence.</p>
+                <p style="font-size: 1rem;">Sangeet under the stars-let's make it unforgettable.</p>
+                <br>
+                <p><strong>Wedding Ceremony:</strong></p>
+                <p>7:00 PM onwards at Sukhdeo Clarks Inn</p>
+                <p style="font-size: 1rem;">Join us & bless us as we begin our new journey together.</p>
+            </section>
+
+            <section class="venue">
+                <h2>Wedding Venue</h2>
+                <p>JW Marriott Hotel Kolkata</p>
+
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14739.669692319663!2d88.38953684609224!3d22.544765887419942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02769db9e49f61%3A0xa2117593c10c8066!2sJW%20Marriott%20Hotel%20Kolkata!5e0!3m2!1sen!2sin!4v1768498730257!5m2!1sen!2sin"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </section>
+        </div>
+
+        <section class="love-story">
+            <h2>Our Love Story</h2>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <!-- Item 1: 2020 (Image Left, Text Right) -->
+                <div class="timeline-item item-left">
+                    <div class="timeline-img-box">
+                        <img src="Assets/first.jpg" alt="First Meeting" class="story-img">
+                    </div>
+                    <div class="timeline-content">
+                        <span class="story-year">2020</span>
+                        <h3 class="story-title">First Meeting</h3>
+                        <p class="story-desc">Met through a shared best friend.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2: 2021 (Text Left, Image Right) -->
+                <div class="timeline-item item-right">
+                    <div class="timeline-content">
+                        <span class="story-year">2021</span>
+                        <h3 class="story-title">First Date</h3>
+                        <p class="story-desc">Special memories, grew closer.</p>
+                    </div>
+                    <div class="timeline-img-box">
+                        <img src="Assets/date.jpg" alt="First Date" class="story-img">
+                    </div>
+                </div>
+
+                <!-- Item 3: 2022 (Image Left, Text Right) -->
+                <div class="timeline-item item-left">
+                    <div class="timeline-img-box">
+                        <img src="Assets/chap.jpg" alt="New Chapter" class="story-img">
+                    </div>
+                    <div class="timeline-content">
+                        <span class="story-year">2022</span>
+                        <h3 class="story-title">New Chapter</h3>
+                        <p class="story-desc">Saw each other less after job changes.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4: 2023 (Text Left, Image Right) -->
+                <div class="timeline-item item-right">
+                    <div class="timeline-content">
+                        <span class="story-year">2023</span>
+                        <h3 class="story-title">Family Bond</h3>
+                        <p class="story-desc">Introduced families, strengthened bond.</p>
+                    </div>
+                    <div class="timeline-img-box">
+                        <img src="Assets/family.jpg" alt="Family Bond" class="story-img">
+                    </div>
+                </div>
+
+                <!-- Item 5: 2024 (Image Left, Text Right) -->
+                <div class="timeline-item item-left">
+                    <div class="timeline-img-box">
+                        <img src="Assets/prop.jpg" alt="Proposal Day" class="story-img">
+                    </div>
+                    <div class="timeline-content">
+                        <span class="story-year">2024</span>
+                        <h3 class="story-title">Proposal Day</h3>
+                        <p class="story-desc">Sealed commitment with a proposal.</p>
+                    </div>
+                </div>
+
+            </div>
         </section>
-        <section class="venue"> 
+
+
+        <section class="album-section">
+            <h2>PRE WEDDING ALBUM</h2>
+
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="Assets/1.jpg" alt="Pre-wedding moment 1"></div>
+                    <div class="swiper-slide"><img src="Assets/2.jpg" alt="Pre-wedding moment 2"></div>
+                    <div class="swiper-slide"><img src="Assets/3.jpg" alt="Pre-wedding moment 3"></div>
+                    <div class="swiper-slide"><img src="Assets/4.jpg" alt="Pre-wedding moment 4"></div>
+                    <div class="swiper-slide"><img src="Assets/5.jpg" alt="Pre-wedding moment 5"></div>
+                    <div class="swiper-slide"><img src="Assets/6.jpg" alt="Pre-wedding moment 6"></div>
+                    <div class="swiper-slide"><img src="Assets/7.jpg" alt="Pre-wedding moment 7"></div>
+                    <div class="swiper-slide"><img src="Assets/8.jpg" alt="Pre-wedding moment 8"></div>
+                    <div class="swiper-slide"><img src="Assets/9.jpg" alt="Pre-wedding moment 9"></div>
+                    <div class="swiper-slide"><img src="Assets/10.jpg" alt="Pre-wedding moment 10"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="video-section">
+            <h2>Our Moments</h2>
+
+            <div class="swiper videoSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <video controls playsinline preload="metadata" poster="Assets/poster3.avif">
+                            <source src="Assets/memory2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="swiper-slide">
+                        <video controls playsinline preload="metadata" poster="Assets/poster2.avif">
+                            <source src="Assets/memory.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="venue">
             <h2>Contact</h2>
-            
-            <p><strong>Nirmal's Contact:</strong></p>
-            
-            <div class="contact-icons" style="display: flex; justify-content: center; gap: 50px; margin-bottom: 30px; align-items: center;">
-            
-                <a href="tel:+917050875950" title="Call Nirmal" style="text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
-                    <img src="Assets/call.gif" alt="Call Icon" style="height: 50px; width: auto;">
+
+            <p><strong>Sidharth's Contact:</strong></p>
+
+            <div class="contact-icons">
+
+                <a href="tel:+917050875950" title="Call Sidharth"
+                    style="text-decoration: none; transition: transform 0.3s; display: flex; flex-direction: row; align-items: center; gap: 15px;"
+                    onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <i class="fa-solid fa-phone clickable-icon-anim" style="font-size: 2rem; color: #444;"></i>
+                    <span
+                        style="color: #444; font-family: 'Montserrat', sans-serif; font-size: 1.1rem;">7050875950</span>
                 </a>
-                
-                <a href="https://wa.me/917050875950" target="_blank" title="WhatsApp Nirmal" style="text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
-                    <img src="Assets/message.gif" alt="WhatsApp Icon" style="height: 50px; width: auto;">
+
+                <a href="https://wa.me/917050875950" target="_blank" title="WhatsApp Sidharth"
+                    style="text-decoration: none; transition: transform 0.3s; display: flex; flex-direction: row; align-items: center; gap: 15px;"
+                    onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <i class="fa-brands fa-whatsapp clickable-icon-anim" style="font-size: 2.2rem; color: #25D366;"></i>
+                    <span style="color: #444; font-family: 'Montserrat', sans-serif; font-size: 1.1rem;">WhatsApp</span>
                 </a>
 
             </div>
 
             <p style="margin-top: 20px;"><strong>Home Address:</strong><br>
-                Gol Bagicha, Nagbanshi Sahay Lane, Gaya, Bihar 823001
+                <a href="https://maps.app.goo.gl/ZJV9HF5E8RGAzCAD7" target="_blank"
+                    style="text-decoration: none; color: inherit; transition: color 0.3s;"
+                    onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='inherit'">
+                    Nayapatty, AP Block, Sector V, Bidhannagar, Kolkata, West Bengal 700102
+                </a>
             </P>
+
         </section>
+
         <footer>
-            <p>With Abundant Love and Joy, <br> Nirmal & Kiara💕</p><br>
-            <p style="font-size: 15px; color: var(--copyright-text); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"><b>© 2025 NirmalWebWorks</b></p>
+            <button id="exit-button-main" class="footer-exit-btn" title="Exit to Home" aria-label="Exit to Home">
+                <span class="exit-text">EXIT</span>
+                <i class="fa-solid fa-right-from-bracket exit-icon"></i>
+            </button>
+            <p class="thank-you-text">Thank You</p>
+            <p class="footer-msg">Your presence and well wishes mean the world to us.</p><br>
+            <p
+                style="font-size: 0.9375rem; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                <a href="https://nirmalwebworks.web.app" target="_blank" style="text-decoration: none; color: inherit;">
+                    <b>© 2026 <span class="gradient-brand-text">NirmalWebWorks</span></b>
+                </a>
+            </p>
         </footer>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
-    
+
 </body>
+
 </html>

@@ -2,8 +2,26 @@
 const preloader = document.getElementById('preloader');
 
 window.onload = function () {
-    // This hides the loader once all assets (images, video, etc.) are loaded
-    preloader.classList.add('hidden');
+    // Explicitly preload the heavy background image
+    const bgImage = new Image();
+    bgImage.src = 'Assets/hand.avif';
+
+    bgImage.onload = function () {
+        // Hide loader only after this specific image is ready (in addition to window.onload)
+        preloader.classList.add('hidden');
+    };
+
+    bgImage.onerror = function () {
+        console.warn("Background image failed to load, hiding preloader anyway.");
+        preloader.classList.add('hidden');
+    };
+
+    // Safety timeout in case image loading hangs
+    setTimeout(() => {
+        if (!preloader.classList.contains('hidden')) {
+            preloader.classList.add('hidden');
+        }
+    }, 5000);
 }
 // --- END PRELOADER LOGIC ---
 
@@ -234,7 +252,7 @@ function initializeMainPage() {
     });
 
     // 5. PROFILE ANIMATION (Same logic)
-    const profileElements = document.querySelectorAll('.profile-name, .profile-hashtags');
+    const profileElements = document.querySelectorAll('.profile-name, .profile-hashtags, .name-slide-left, .name-slide-right');
     profileElements.forEach(el => {
         timelineObserver.observe(el);
     });
@@ -295,31 +313,55 @@ function initializeMainPage() {
         // No autoplay for videos
     });
 
-    // 8. VIDEO AUDIO MANAGEMENT
-    const contentVideos = document.querySelectorAll('.videoSwiper video');
-    contentVideos.forEach(video => {
-        video.addEventListener('play', () => {
-            // 1. Mute/Pause Background Music
-            if (!backgroundMusic.paused) {
-                backgroundMusic.pause();
-                // Update icons to reflect paused state if needed, though we track "muted" state usually.
-                // If we simply pause, the user can resume.
-            }
+    // 8. VIDEO AUDIO MANAGEMENT (UPDATED)
+    const videoWrappers = document.querySelectorAll('.video-wrapper');
 
-            // 2. Pause other videos
-            contentVideos.forEach(otherVideo => {
-                if (otherVideo !== video && !otherVideo.paused) {
-                    otherVideo.pause();
+    videoWrappers.forEach(wrapper => {
+        const video = wrapper.querySelector('video');
+        const overlay = wrapper.querySelector('.play-overlay');
+
+        if (!video || !overlay) return;
+
+        // Play Video on Overlay Click
+        overlay.addEventListener('click', () => {
+            // Pause all other videos first
+            document.querySelectorAll('.videoSwiper video').forEach(v => {
+                if (v !== video && !v.paused) {
+                    v.pause();
                 }
             });
+
+            // Play this video
+            video.controls = true; // Show native controls
+            video.play().then(() => {
+                overlay.classList.add('hidden'); // Hide overlay
+            }).catch(e => console.log("Play failed", e));
         });
 
-        // 3. Resume Background Music when Paused
+        // Video Events
+        video.addEventListener('play', () => {
+            // Mute Background Music
+            if (!backgroundMusic.paused) {
+                backgroundMusic.pause();
+            }
+            overlay.classList.add('hidden'); // Ensure hidden
+        });
+
         video.addEventListener('pause', () => {
-            const allPaused = Array.from(contentVideos).every(v => v.paused);
+            video.controls = false; // Hide native controls
+            overlay.classList.remove('hidden'); // Show overlay
+
+            // Resume Music if all videos paused
+            const allPaused = Array.from(document.querySelectorAll('.videoSwiper video')).every(v => v.paused);
             if (allPaused && !isMusicMuted) {
                 backgroundMusic.play().catch(e => console.log("Bg music resume failed", e));
             }
+        });
+
+        video.addEventListener('ended', () => {
+            video.controls = false;
+            overlay.classList.remove('hidden');
+            // Music resume handled by pause event usually, but redundancy is fine
         });
     });
 

@@ -78,8 +78,8 @@
             <button id="mute-unmute-video-screen" class="control-button" title="Mute Music" aria-label="Mute Music"><i
                     class="fa-solid fa-volume-high"></i></button>
             <!-- DEV TEMP -->
-            <!-- <button id="dev-skip-button" class="control-button" title="Skip Video (Dev)" aria-label="Skip Video"
-                style="background: rgba(255, 0, 0, 0.7); width: auto; padding: 0 15px; border-radius: 20px; font-size: 0.8rem; font-family: sans-serif;">Skip</button> -->
+            <button id="dev-skip-button" class="control-button" title="Skip Video (Dev)" aria-label="Skip Video"
+                style="background: rgba(255, 0, 0, 0.7); width: auto; padding: 0 15px; border-radius: 20px; font-size: 0.8rem; font-family: sans-serif;">Skip</button>
         </div>
 
     </div>
@@ -106,10 +106,10 @@
             </div>
 
             <h1 class="hero-title">
-                Sidharth Gupta
+                <span class="name-slide-left">Sidharth Gupta</span>
                 <span class="parent-details">(S/o Mr. Sunil Gupta & Mrs. Rimma Gupta)</span>
                 <span class="separator-with">with</span>
-                Kiara Gupta
+                <span class="name-slide-right">Kiara Gupta</span>
                 <span class="parent-details">(D/o Mr. Jagdeep Gupta & Mrs. Disha Gupta)</span>
             </h1>
             <div class="separator-with" style="font-size: 4rem;">on</div>
@@ -320,16 +320,26 @@
             <div class="swiper videoSwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <video controls playsinline preload="metadata" poster="Assets/poster3.avif">
-                            <source src="Assets/memory2.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+                        <div class="video-wrapper">
+                            <video playsinline preload="metadata" poster="Assets/poster3.avif">
+                                <source src="Assets/memory2.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="play-overlay">
+                                <i class="fa-solid fa-play"></i>
+                            </div>
+                        </div>
                     </div>
                     <div class="swiper-slide">
-                        <video controls playsinline preload="metadata" poster="Assets/poster2.avif">
-                            <source src="Assets/memory.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+                        <div class="video-wrapper">
+                            <video playsinline preload="metadata" poster="Assets/poster2.avif">
+                                <source src="Assets/memory.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="play-overlay">
+                                <i class="fa-solid fa-play"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -346,7 +356,7 @@
                 <a href="tel:+917050875950" title="Call Sidharth"
                     style="text-decoration: none; transition: transform 0.3s; display: flex; flex-direction: row; align-items: center; gap: 15px;"
                     onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <i class="fa-solid fa-phone clickable-icon-anim" style="font-size: 2rem; color: #444;"></i>
+                    <i class="fa-solid fa-phone" style="font-size: 2rem; color: #444;"></i>
                     <span
                         style="color: #444; font-family: 'Montserrat', sans-serif; font-size: 1.1rem;">7050875950</span>
                 </a>
@@ -354,7 +364,7 @@
                 <a href="https://wa.me/917050875950" target="_blank" title="WhatsApp Sidharth"
                     style="text-decoration: none; transition: transform 0.3s; display: flex; flex-direction: row; align-items: center; gap: 15px;"
                     onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <i class="fa-brands fa-whatsapp clickable-icon-anim" style="font-size: 2.2rem; color: #25D366;"></i>
+                    <i class="fa-brands fa-whatsapp" style="font-size: 2.2rem; color: #25D366;"></i>
                     <span style="color: #444; font-family: 'Montserrat', sans-serif; font-size: 1.1rem;">WhatsApp</span>
                 </a>
 

@@ -530,20 +530,14 @@ header h1 {
     font-family: 'Great Vibes', cursive;
     font-size: 3.75rem;
     padding-top: 20px;
-    /* Reduced padding since Ganesh is above */
     margin: 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     letter-spacing: 2px;
-    background: linear-gradient(90deg, #8c0f5f, #d4af37, #8c0f5f);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% auto;
-    animation: gradient-move 3s linear infinite;
     line-height: 1.1;
-    /* Reduced from 1.5 to tighten name spacing */
     padding-bottom: 0.2em;
 }
+
+
 
 
 
@@ -639,14 +633,49 @@ header h1 {
     margin: 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     letter-spacing: 2px;
+    line-height: 1.5;
+    padding-bottom: 0.2em;
+    /* Gradient moved to spans for animation support */
+}
+
+/* --- HEADER NAME ANIMATIONS --- */
+.hero-title .name-slide-left,
+.hero-title .name-slide-right {
+    position: relative;
+    /* Use relative positioning to keep inline behavior */
+    opacity: 0;
+    transition: opacity 1s ease-out, left 1s ease-out, right 1s ease-out;
+
+    /* Re-applied Gradient Styles */
     background: linear-gradient(90deg, #8c0f5f, #d4af37, #8c0f5f);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% auto;
     animation: gradient-move 3s linear infinite;
-    line-height: 1.5;
-    padding-bottom: 0.2em;
+
+    /* Force Correct Font and Size with High Specificity */
+    font-family: 'Great Vibes', cursive !important;
+    font-size: inherit !important;
+}
+
+.name-slide-left {
+    left: -50px;
+}
+
+.name-slide-right {
+    left: 50px;
+}
+
+/* Animation Active State */
+.name-slide-left.in-view {
+    opacity: 1;
+    left: 0;
+}
+
+.name-slide-right.in-view {
+    opacity: 1;
+    left: 0;
 }
 
 header p {
@@ -816,6 +845,67 @@ h2::after {
     display: block;
 }
 
+/* --- VIDEO WRAPPER & OVERLAY STYLES --- */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    /* Slight dark tint */
+    cursor: pointer;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+}
+
+.play-overlay i {
+    font-size: 3rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+    padding-left: 8px;
+    /* Visual center fix */
+}
+
+.play-overlay:hover i {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Hidden state for overlay */
+.play-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* Shared styles for schedule and venue */
 .schedule,
 .venue {
@@ -939,9 +1029,9 @@ footer p:first-child {
 .footer-msg {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.1rem;
-    color: #444;
+    color: #ffffff;
     margin-top: 5px;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 
@@ -1610,25 +1700,7 @@ footer p:first-child {
     animation-delay: 0.3s;
 }
 
-/* --- CLICKABLE ICON ANIMATION --- */
-@keyframes icon-pulse {
-    0% {
-        transform: scale(1);
-    }
 
-    50% {
-        transform: scale(1.15);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-.clickable-icon-anim {
-    display: inline-block;
-    animation: icon-pulse 1.5s infinite ease-in-out;
-}
 
 /* Contact Icons Layout */
 .contact-icons {
@@ -2006,30 +2078,32 @@ footer p:first-child {
 
 @media (max-width: 768px) {
     .footer-exit-btn {
-        padding: 10px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        /* Circle on mobile */
+        padding: 5px 14px;
+        /* Smaller padding */
+        font-size: 0.7rem;
+        /* Smaller text */
+        width: auto;
+        height: auto;
+        border-radius: 30px;
+        /* Access desktop pill shape */
         top: 15px;
         left: 15px;
     }
 
     .exit-text {
-        display: none;
-        /* Hide text on Mobile */
+        display: inline;
+        /* Show text */
     }
 
     .exit-icon {
-        display: block;
-        /* Show icon on Mobile */
-        font-size: 1rem;
+        display: none;
+        /* Keep icon hidden */
     }
 }
 
 /* --- BRAND ANIMATION --- */
 .gradient-brand-text {
-    background: linear-gradient(90deg, #ffffff, #d4af37, #ff69b4, #ffffff);
+    background: linear-gradient(90deg, #d4af37, #d4af37, #ff69b4, #ffffff);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;

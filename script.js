@@ -154,47 +154,8 @@ if (muteVideoScreenButton) {
 // --- MAIN INITIALIZATION FUNCTION (Called when P3 becomes visible) ---
 function initializeMainPage() {
 
-    // 1. COUNTDOWN LOGIC (CUSTOM) ---
-    const targetDate = new Date("April 15, 2026 00:00:00").getTime();
-
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-
-        if (distance < 0) {
-            document.getElementById("countdown-timer").innerHTML = "<h3>The Big Day is Here!</h3>";
-            return;
-        }
-
-        const daysStr = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-        const hoursStr = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-        const minutesStr = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-        const secondsStr = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
-
-        // Update Split Digits
-        updateFlipCard("day-ten", daysStr[0]);
-        updateFlipCard("day-one", daysStr[1]);
-
-        updateFlipCard("hour-ten", hoursStr[0]);
-        updateFlipCard("hour-one", hoursStr[1]);
-
-        updateFlipCard("min-ten", minutesStr[0]);
-        updateFlipCard("min-one", minutesStr[1]);
-
-        updateFlipCard("sec-ten", secondsStr[0]);
-        updateFlipCard("sec-one", secondsStr[1]);
-    }
-
-    function updateFlipCard(id, value) {
-        const el = document.getElementById(id);
-        if (el && el.innerText !== value) {
-            el.innerText = value;
-        }
-    }
-
-    // Update immediately and then every second
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    // 1. COUNTDOWN LOGIC (REPLACED WITH WIDGET)
+    // The LogWork widget handles the countdown automatically via the script tag in HTML.
 
     // 2. SECTION ANIMATION (Intersection Observer)
     const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };

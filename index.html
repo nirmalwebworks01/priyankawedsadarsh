@@ -129,47 +129,17 @@
                 <i class="fa-solid fa-heart small-heart"></i>
             </div>
 
-            <div id="countdown-timer" class="flip-clock-wrapper">
-                <!-- Days -->
-                <div class="flip-group">
-                    <div class="flip-digits">
-                        <div class="flip-card" id="day-ten">0</div>
-                        <div class="flip-card" id="day-one">0</div>
-                    </div>
-                    <div class="flip-label">Days</div>
-                </div>
-
-                <div class="flip-separator">:</div>
-
-                <!-- Hours -->
-                <div class="flip-group">
-                    <div class="flip-digits">
-                        <div class="flip-card" id="hour-ten">0</div>
-                        <div class="flip-card" id="hour-one">0</div>
-                    </div>
-                    <div class="flip-label">Hours</div>
-                </div>
-
-                <div class="flip-separator">:</div>
-
-                <!-- Minutes -->
-                <div class="flip-group">
-                    <div class="flip-digits">
-                        <div class="flip-card" id="min-ten">0</div>
-                        <div class="flip-card" id="min-one">0</div>
-                    </div>
-                    <div class="flip-label">Minutes</div>
-                </div>
-
-                <div class="flip-separator">:</div>
-
-                <!-- Seconds -->
-                <div class="flip-group">
-                    <div class="flip-digits">
-                        <div class="flip-card" id="sec-ten">0</div>
-                        <div class="flip-card" id="sec-one">0</div>
-                    </div>
-                    <div class="flip-label">Seconds</div>
+            <!-- LogWork Countdown Widget -->
+            <div class="widget-wrapper">
+                <a href="https://logwork.com/countdown-timer" class="countdown-timer" data-timezone="Asia/Kolkata"
+                    data-textcolor="#transparent" data-date="2026-04-15 15:00" data-digitscolor="#8c0f5f"
+                    data-background="#ffffff" data-unitscolor="#ffffff00">.</a>
+                <script src="https://cdn.logwork.com/widget/countdown.js"></script>
+                <div class="custom-labels">
+                    <span>Days</span>
+                    <span>Hours</span>
+                    <span>Minutes</span>
+                    <span>Seconds</span>
                 </div>
             </div>
         </section>
@@ -221,8 +191,8 @@
 
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14739.669692319663!2d88.38953684609224!3d22.544765887419942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02769db9e49f61%3A0xa2117593c10c8066!2sJW%20Marriott%20Hotel%20Kolkata!5e0!3m2!1sen!2sin!4v1768498730257!5m2!1sen!2sin"
-                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    width="600" height="450" style="border:0; opacity: 0; transition: opacity 1s;" allowfullscreen=""
+                    loading="lazy" onload="this.style.opacity='1'" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </section>
         </div>
 

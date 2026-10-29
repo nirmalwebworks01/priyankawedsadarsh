@@ -507,50 +507,168 @@ header * {
     letter-spacing: 2px;
 }
 
-.parent-details {
-    display: block;
-    font-family: 'Montserrat', sans-serif !important;
-    /* Override hero-title span */
-    font-size: 1.125rem !important;
-    color: #444;
-    text-transform: none !important;
-    -webkit-text-fill-color: #444;
-    background: none;
-    margin-top: -20px !important;
-    /* Tighten gap */
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-    font-weight: 500;
-    text-shadow: none;
-    animation: none;
-}
-
-/* ... */
-header h1 {
+/* --- MAIN INVITATION COUPLE SCRIPT SECTION --- */
+header h1.main-couple-title {
     font-family: 'Great Vibes', cursive;
-    font-size: 3.75rem;
-    padding-top: 20px;
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    letter-spacing: 2px;
-    line-height: 1.1;
-    padding-bottom: 0.2em;
+    margin: 25px auto 15px auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
 }
 
-
-
-
-
-.separator-with {
-    display: block;
-    font-size: 0.5em;
-    margin: 30px 0 !important;
+.main-couple-title .couple-name {
     font-family: 'Great Vibes', cursive !important;
-    color: #d4af37;
-    -webkit-text-fill-color: #d4af37;
-    text-transform: none !important;
+    font-size: clamp(3.2rem, 7vw, 5.2rem) !important;
+    line-height: 1.25;
+    letter-spacing: 1.5px;
+    background: linear-gradient(90deg, #8c0f5f 0%, #d4af37 50%, #8c0f5f 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.08);
+    display: block;
+    padding: 2px 10px;
+    position: relative;
+    will-change: transform, opacity;
 }
 
+.main-couple-title .name-slide-left {
+    animation: slideInBride 1.2s cubic-bezier(0.25, 1, 0.5, 1) both, gradient-move 3.5s linear infinite;
+}
+
+.main-couple-title .name-slide-right {
+    animation: slideInGroom 1.2s cubic-bezier(0.25, 1, 0.5, 1) both, gradient-move 3.5s linear infinite;
+    animation-delay: 0.15s, 0s;
+}
+
+@keyframes slideInBride {
+    0% {
+        opacity: 0;
+        transform: translateX(-55px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInGroom {
+    0% {
+        opacity: 0;
+        transform: translateX(55px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.main-couple-title .parent-details {
+    display: block !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: clamp(0.95rem, 2.2vw, 1.15rem) !important;
+    color: #4a4a4a !important;
+    -webkit-text-fill-color: #4a4a4a !important;
+    background: none !important;
+    margin: 4px 0 0 0 !important;
+    padding: 0 10px !important;
+    letter-spacing: 0.5px !important;
+    font-weight: 500 !important;
+    text-shadow: none !important;
+    text-transform: none !important;
+    animation: none !important;
+    line-height: 1.5 !important;
+}
+
+/* Center Separator: 1. Infinity Symbol (∞) on top, 2. FOREVER with in one line */
+.couple-separator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 18px 0;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.separator-infinity {
+    font-size: clamp(2rem, 4.5vw, 2.5rem);
+    color: #8c0f5f;
+    -webkit-text-fill-color: #8c0f5f;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0;
+    margin: 0;
+}
+
+.separator-infinity i {
+    display: inline-block;
+    transform-origin: center center;
+    will-change: transform;
+    animation: knot-pulse 2s infinite ease-in-out;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+@keyframes knot-pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.22);
+    }
+}
+
+.separator-row {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    line-height: 1;
+}
+
+.separator-forever,
+.separator-with {
+    font-family: 'Cinzel', serif !important;
+    font-size: clamp(0.95rem, 2.2vw, 1.2rem) !important;
+    font-weight: 700 !important;
+    letter-spacing: 5px !important;
+    color: #d4af37 !important;
+    -webkit-text-fill-color: #d4af37 !important;
+    text-transform: uppercase !important;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.separator-forever {
+    padding-left: 5px;
+}
+
+.separator-on {
+    font-family: 'Great Vibes', cursive !important;
+    font-size: clamp(2.6rem, 5vw, 3.4rem) !important;
+    color: #d4af37 !important;
+    -webkit-text-fill-color: #d4af37 !important;
+    text-transform: lowercase !important;
+    margin: 25px 0 10px 0 !important;
+    line-height: 1 !important;
+    text-align: center;
+}
 
 /* Typewriter Effect */
 .typewriter-wrapper {
@@ -563,18 +681,14 @@ header h1 {
 .typewriter-text {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.125rem;
-    /* Increased size */
     color: #444;
     text-align: center;
     margin: 0 auto;
     letter-spacing: 1px;
     max-width: 90%;
-    /* Relaxed width so <br> controls the break */
     line-height: 1.5;
     font-weight: 500;
 }
-
-
 
 /* Mobile adjustment */
 @media (max-width: 768px) {
@@ -583,99 +697,38 @@ header h1 {
         max-width: 90%;
     }
 
-    /* ADDED: Match parent details to mobile size */
-    .parent-details {
-        font-size: 0.875rem !important;
-    }
-
-    /* ADDED: Fix header title overflow */
-    header .hero-title {
-        font-size: 14vw !important;
-        /* Changed to vw to scale with width */
+    header h1.main-couple-title .couple-name {
+        font-size: 13vw !important;
         line-height: 1.2;
-        padding: 0 5px;
-        /* Reduce padding to give more space */
-        padding-top: 0 !important;
-        /* Remove top padding on mobile */
-        margin-top: 25px !important;
     }
 
-    /* ADDED: Fix "with" size on mobile */
+    .main-couple-title .parent-details {
+        font-size: 0.85rem !important;
+        margin-top: 3px !important;
+    }
 
+    .separator-infinity {
+        font-size: 1.8rem !important;
+    }
 
+    .separator-row {
+        gap: 8px;
+    }
+
+    .separator-forever,
     .separator-with {
-        font-size: 3rem !important;
-        margin: 15px 0 !important;
+        font-size: 0.88rem !important;
+        letter-spacing: 4px !important;
     }
 
-    /* ADDED: Ensure parents are centered */
-    /* ADDED: Ensure parents are centered */
-    .parent-details {
-        text-align: center !important;
-        font-size: 0.7rem !important;
-        width: 100%;
-        display: block;
-        margin-top: 5px !important;
-        /* Adjusted for better spacing */
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        white-space: normal !important;
-        /* Force wrapping for long text */
+    .separator-forever {
+        padding-left: 4px;
     }
-}
 
-
-header h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 3.75rem;
-    padding-top: 20px;
-    /* Reduced padding since Ganesh is above */
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    letter-spacing: 2px;
-    line-height: 1.5;
-    padding-bottom: 0.2em;
-    /* Gradient moved to spans for animation support */
-}
-
-/* --- HEADER NAME ANIMATIONS --- */
-.hero-title .name-slide-left,
-.hero-title .name-slide-right {
-    position: relative;
-    /* Use relative positioning to keep inline behavior */
-    opacity: 0;
-    transition: opacity 1s ease-out, left 1s ease-out, right 1s ease-out;
-
-    /* Re-applied Gradient Styles */
-    background: linear-gradient(90deg, #8c0f5f, #d4af37, #8c0f5f);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% auto;
-    animation: gradient-move 3s linear infinite;
-
-    /* Force Correct Font and Size with High Specificity */
-    font-family: 'Great Vibes', cursive !important;
-    font-size: inherit !important;
-}
-
-.name-slide-left {
-    left: -50px;
-}
-
-.name-slide-right {
-    left: 50px;
-}
-
-/* Animation Active State */
-.name-slide-left.in-view {
-    opacity: 1;
-    left: 0;
-}
-
-.name-slide-right.in-view {
-    opacity: 1;
-    left: 0;
+    .separator-on {
+        font-size: 2.4rem !important;
+        margin: 15px 0 5px 0 !important;
+    }
 }
 
 header p {
@@ -1727,10 +1780,9 @@ footer p:first-child {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50%;
-    /* Fade starts halfway up */
-    background: linear-gradient(to top, rgba(101, 67, 49, 0.95), transparent);
-    /* Brownish gradient from image */
+    height: 55%;
+    /* Dark gradient for high contrast readability */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.45) 60%, transparent 100%);
     z-index: 1;
 }
 
@@ -1739,36 +1791,32 @@ footer p:first-child {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 20px;
+    padding: 24px 20px;
     text-align: center;
     z-index: 2;
-    color: white;
+    color: #ffffff;
 }
 
 .profile-name {
     font-family: 'Cinzel', serif;
-    font-size: 2.5rem;
-    margin: 0 0 5px 0;
-    font-weight: 400;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-}
-
-.profile-name.in-view {
-    animation: slideIn 1s forwards ease-out;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    margin: 0 0 6px 0;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    opacity: 1;
+    letter-spacing: 1px;
 }
 
 .profile-hashtags {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.9rem;
-    margin-bottom: 15px;
+    font-size: 0.95rem;
+    margin: 0;
     font-weight: 500;
-    opacity: 0;
-}
-
-.profile-hashtags.in-view {
-    animation: slideIn 1s forwards ease-out;
-    animation-delay: 0.3s;
+    color: #ffffff;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+    opacity: 1;
+    letter-spacing: 0.5px;
 }
 
 
@@ -1810,279 +1858,44 @@ footer p:first-child {
 
     .profile-hashtags {
         font-size: 0.8rem;
-
-        /* --- INFO COLUMNS (Schedule & Venue) --- */
-        .info-columns {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto 40px auto;
-            padding: 0 20px;
-            flex-wrap: wrap;
-        }
-
-        .info-columns section {
-            flex: 1;
-            min-width: 300px;
-            /* Ensure they don't get too squished */
-            background: transparent;
-            /* Assuming sections have their own styling or transparent */
-            padding: 20px;
-            box-shadow: none;
-            /* Reset if section had defaults */
-        }
-
-        /* Ensure map is responsive inside column */
-        .venue iframe {
-            width: 100%;
-            max-width: 100%;
-            height: 300px;
-            /* Reduce height for column view */
-        }
-
-        @media (max-width: 768px) {
-            .info-columns {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .info-columns section {
-                width: 100%;
-            }
-        }
     }
 }
 
-/* --- LOVE STORY TIMELINE --- */
-.love-story {
-    padding: 60px 20px;
-    background-image: url('Assets/back.webp');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    /* Parallax effect */
-    text-align: center;
-    overflow: hidden;
-    position: relative;
-    color: white;
-}
-
-.love-story h2::after {
-    display: none;
-}
-
-/* Dark Overlay */
-.love-story::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    /* Dark overlay for readability */
-    z-index: 1;
-}
-
-.love-story * {
-    position: relative;
-    z-index: 2;
-}
-
-.timeline-container {
-    position: relative;
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 20px 0;
-}
-
-/* Vertical Center Line */
-.timeline-line {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 2px;
-    background: #d4af37;
-    /* Gold line */
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-.timeline-item {
+/* --- INFO COLUMNS (Schedule & Venue) --- */
+.info-columns {
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin-bottom: 60px;
-    position: relative;
-    z-index: 2;
-    gap: 50px;
-    /* Space between content and image */
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
 }
 
-.timeline-item:last-child {
-    margin-bottom: 0;
-}
-
-.timeline-img-box,
-.timeline-content {
+.info-columns section {
     flex: 1;
-    /* Equal space */
-    display: flex;
-    flex-direction: column;
+    min-width: 300px;
+    background: transparent;
+    padding: 20px;
+    box-shadow: none;
 }
 
-/* Alignment Logic */
-/* Left Item: Image Left, Content Right */
-.item-left .timeline-img-box {
-    align-items: flex-end;
-    /* Push image to center */
+.venue iframe {
+    width: 100%;
+    max-width: 100%;
+    height: 350px;
 }
 
-.item-left .timeline-content {
-    align-items: flex-start;
-    /* Push text to center */
-    text-align: left;
-}
-
-/* Right Item: Content Left, Image Right */
-.item-right .timeline-content {
-    align-items: flex-end;
-    text-align: right;
-}
-
-.item-right .timeline-img-box {
-    align-items: flex-start;
-}
-
-/* Image Styles */
-.story-img {
-    width: 250px;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 15px;
-    border: 4px solid #8d6e63;
-    /* Brownish border */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Typography */
-.story-year {
-    font-family: 'Cinzel', serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-    color: #fce4ec;
-    /* Light pink/cream to pop */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.story-title {
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    color: #fff;
-    /* White for dark bg */
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.story-desc {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.9rem;
-    color: #e0e0e0;
-    /* Light grey */
-    max-width: 250px;
-    line-height: 1.4;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-/* Mobile Responsiveness */
-/* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .timeline-container {
-        margin: 20px auto;
-        padding: 10px 0;
+    .info-columns {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .timeline-item {
-        gap: 15px;
-        /* Reduced gap */
-        margin-bottom: 40px;
+    .info-columns section {
+        width: 100%;
     }
-
-    .story-img {
-        width: 120px;
-        /* Much smaller images */
-        height: 120px;
-        border-width: 2px;
-        border-radius: 10px;
-    }
-
-    .story-year {
-        font-size: 1.5rem;
-        /* Smaller year */
-    }
-
-    .story-title {
-        font-size: 0.9rem;
-        /* Smaller title */
-        margin-bottom: 3px;
-    }
-
-    .story-desc {
-        font-size: 0.7rem;
-        /* Smaller desc */
-        max-width: 120px;
-        /* Restrict width to match image size approx */
-        line-height: 1.3;
-    }
-
-    /* Maintain Left/Right Logic but tighter */
-    /* Left Item */
-    .item-left .timeline-img-box {
-        align-items: flex-end;
-        /* Keep image near center */
-    }
-
-    .item-left .timeline-content {
-        align-items: flex-start;
-        /* Keep text near center */
-        text-align: left;
-    }
-
-    /* Right Item */
-    .item-right .timeline-img-box {
-        align-items: flex-start;
-    }
-
-    .item-right .timeline-content {
-        align-items: flex-end;
-        text-align: right;
-    }
-}
-
-/* --- SCROLL ANIMATION CLASSES (Re-applied) --- */
-.timeline-item {
-    opacity: 0;
-    transition: all 0.8s ease-out;
-    transform: translateY(50px);
-    /* Start from below */
-}
-
-/* Initial States (No side movement) */
-.item-left,
-.item-right {
-    transform: translateY(50px);
-}
-
-/* Active State (Triggered by JS) */
-.timeline-item.in-view {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* --- FOOTER MOBILE STYLES --- */
@@ -2116,59 +1929,60 @@ footer p:first-child {
     position: absolute;
     top: 20px;
     left: 20px;
-    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, #8c0f5f 0%, #6a0b49 100%);
     color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 8px 20px;
+    border: 1.5px solid #d4af37;
+    padding: 10px 22px;
     border-radius: 30px;
     font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
+    font-size: 0.88rem;
+    font-weight: 700;
     letter-spacing: 2px;
     cursor: pointer;
     transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(140, 15, 95, 0.5);
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-    /* Added shadow for visibility */
+    text-transform: uppercase;
 }
 
 .footer-exit-btn:hover {
-    background: rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, #a1146e 0%, #8c0f5f 100%);
+    border-color: #ffd700;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 12px rgba(212, 175, 55, 0.6);
+    color: #ffffff;
 }
 
 .exit-icon {
-    display: none;
-    /* Hidden on Desktop */
+    display: inline-block;
+    color: #d4af37;
+    font-size: 0.95rem;
+    transition: transform 0.3s ease;
+}
+
+.footer-exit-btn:hover .exit-icon {
+    transform: translateX(3px);
+    color: #ffd700;
 }
 
 @media (max-width: 768px) {
     .footer-exit-btn {
-        padding: 5px 14px;
-        /* Smaller padding */
-        font-size: 0.7rem;
-        /* Smaller text */
-        width: auto;
-        height: auto;
-        border-radius: 30px;
-        /* Access desktop pill shape */
+        padding: 8px 16px;
+        font-size: 0.78rem;
         top: 15px;
         left: 15px;
     }
 
     .exit-text {
         display: inline;
-        /* Show text */
     }
 
     .exit-icon {
-        display: none;
-        /* Keep icon hidden */
+        display: inline-block;
     }
 }
 
@@ -2182,3 +1996,428 @@ footer p:first-child {
     animation: gradient-move 3s linear infinite;
     font-weight: 800;
 }
+
+/* =========================================================
+   PRIYANKA & ADARSH WEDDING INVITATION ROYAL ENGLISH THEME
+   ========================================================= */
+
+/* --- SPIRITUAL & BLESSING BANNERS --- */
+.shloka-banner {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #6a0b49;
+    max-width: 850px;
+    margin: 14px auto 0 auto;
+    line-height: 1.8;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 1px dashed rgba(212, 175, 55, 0.6);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    letter-spacing: 1px;
+}
+
+.invitation-intro {
+    margin: 25px auto 15px auto;
+    max-width: 850px;
+}
+
+.guru-kripa {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    color: var(--ref-button-bg);
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* --- COUPLE LINEAGE & FAMILY HERITAGE CARDS --- */
+/* Couple section styles defined above in main script section */
+
+
+
+/* --- WEDDING EVENTS SECTION --- */
+.karyakram-section {
+    padding: 60px 20px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(248, 225, 231, 0.5) 100%);
+    border-radius: 30px;
+    max-width: 1100px;
+    margin: 45px auto;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    position: relative;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.karyakram-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-top: 35px;
+    padding: 0 10px;
+}
+
+.karyakram-card {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 28px 20px;
+    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.karyakram-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #8c0f5f, #d4af37, #8c0f5f);
+}
+
+.karyakram-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px rgba(140, 15, 95, 0.15);
+    border-color: #d4af37;
+}
+
+.karyakram-img-wrapper {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    border: 3px solid #d4af37;
+    box-shadow: 0 8px 22px rgba(140, 15, 95, 0.2);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.karyakram-card:hover .karyakram-img-wrapper {
+    transform: scale(1.08);
+    box-shadow: 0 12px 28px rgba(212, 175, 55, 0.4);
+    border-color: #8c0f5f;
+}
+
+.karyakram-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    transform: scale(1.18);
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.karyakram-card:hover .karyakram-img {
+    transform: scale(1.24);
+}
+
+.karyakram-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ref-button-bg);
+    margin: 0 0 6px 0;
+    line-height: 1.35;
+    letter-spacing: 0.5px;
+}
+
+/* PC Specific: Keep event titles strictly in one line */
+@media (min-width: 769px) {
+    .karyakram-section {
+        max-width: 1240px;
+    }
+
+    .karyakram-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
+
+    .karyakram-card {
+        padding: 28px 12px;
+    }
+
+    .karyakram-title {
+        white-space: nowrap;
+        font-size: clamp(1rem, 1.18vw, 1.25rem);
+        letter-spacing: 0px;
+    }
+}
+
+.karyakram-title-en {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    color: #777;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.karyakram-date-badge {
+    display: inline-block;
+    background: var(--ref-button-bg);
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 30px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 10px rgba(140, 15, 95, 0.2);
+}
+
+.karyakram-day {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    color: #d4af37;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.karyakram-desc {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.92rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+
+/* --- VENUE SECTION ENHANCEMENT --- */
+.venue-details-box {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 35px 25px;
+    max-width: 950px;
+    margin: 0 auto;
+    border: 1.5px solid rgba(212, 175, 55, 0.45);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+.venue-name-main {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.3rem, 4.5vw, 2.2rem);
+    font-weight: 700;
+    color: var(--ref-button-bg);
+    margin-bottom: 8px;
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.venue-tagline {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    color: #d4af37;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.venue-address-block {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.btn-directions {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--ref-button-bg), #6a0b49);
+    color: #ffffff;
+    padding: 13px 32px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(140, 15, 95, 0.28);
+    transition: all 0.3s ease;
+    margin-bottom: 25px;
+}
+
+.btn-directions:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(140, 15, 95, 0.38);
+    color: #ffffff;
+}
+
+/* --- CORDIAL INVITATION & RSVP SECTION --- */
+.family-section {
+    max-width: 950px;
+    margin: 45px auto;
+    padding: 45px 25px;
+    background: #ffffff;
+    border-radius: 25px;
+    border: 1.5px solid rgba(212, 175, 55, 0.45);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+.host-rsvp-card {
+    max-width: 760px;
+    margin: 25px auto 0 auto;
+    background: linear-gradient(135deg, #fff5f8 0%, #ffffff 100%);
+    padding: 35px 25px;
+    border-radius: 20px;
+    border: 1.5px solid #d4af37;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(140, 15, 95, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.host-rsvp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(140, 15, 95, 0.12);
+}
+
+.host-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ref-button-bg);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.host-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.2rem, 3.8vw, 1.85rem);
+    font-weight: 700;
+    color: #222;
+    margin: 4px 0 8px 0;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.host-firm {
+    font-family: 'Montserrat', 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ref-button-bg);
+    margin-bottom: 8px;
+}
+
+.host-address {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.contact-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.contact-pill.phone {
+    background: var(--ref-button-bg);
+    color: #ffffff;
+}
+
+.contact-pill.whatsapp {
+    background: #25D366;
+    color: #ffffff;
+}
+
+.contact-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+}
+
+/* Responsive updates for elements */
+@media (max-width: 768px) {
+    .lineage-card {
+        padding: 24px 18px;
+    }
+
+    .lineage-name {
+        font-size: 1.7rem;
+    }
+
+    .gathbandhan-divider {
+        margin: 10px 0;
+    }
+
+    .formal-invitation-quote {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        padding: 18px 20px;
+    }
+
+    .countdown-digit-box {
+        min-width: 65px;
+        padding: 10px 12px;
+    }
+
+    .countdown-num {
+        font-size: 1.75rem;
+    }
+
+    .karyakram-section {
+        padding: 40px 15px;
+    }
+
+    .family-section {
+        padding: 30px 15px;
+    }
+
+    .host-rsvp-card {
+        padding: 25px 12px;
+    }
+
+    .host-name {
+        font-size: clamp(0.95rem, 4.8vw, 1.45rem);
+        white-space: nowrap;
+    }
+
+    .venue-details-box {
+        padding: 28px 14px;
+    }
+
+    .venue-name-main {
+        font-size: clamp(1.05rem, 5.2vw, 1.65rem);
+        white-space: nowrap;
+    }
+}
+

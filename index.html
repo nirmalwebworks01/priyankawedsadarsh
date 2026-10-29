@@ -4,13 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Sidharth & Kiara's Wedding Invitation</title>
+    <title>Priyanka & Adarsh's Wedding Invitation</title>
+    <meta name="description"
+        content="You are cordially invited along with your family to celebrate the wedding of Priyanka & Adarsh on December 5, 2026 at Janakpuri Palace, Aurangabad, Bihar.">
+
+    <!-- Open Graph / WhatsApp / Facebook Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Priyanka & Adarsh's Wedding Invitation">
+    <meta property="og:description"
+        content="You are cordially invited along with your family to celebrate the wedding of Priyanka & Adarsh on December 5, 2026 at Janakpuri Palace, Aurangabad, Bihar.">
+    <meta property="og:image" content="Assets/meta.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+
+    <!-- Twitter / X Preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Priyanka & Adarsh's Wedding Invitation">
+    <meta name="twitter:description"
+        content="You are cordially invited along with your family to celebrate the wedding of Priyanka & Adarsh on December 5, 2026 at Janakpuri Palace, Aurangabad, Bihar.">
+    <meta name="twitter:image" content="Assets/meta.jpg">
+
+    <link rel="apple-touch-icon" href="Assets/meta.jpg">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -19,7 +40,7 @@
 
     <link rel="preload" href="Assets/png1.png" as="image">
     <link rel="preload" href="Assets/flower.gif" as="image">
-    <link rel="preload" href="Assets/hand.avif" as="image" fetchpriority="high">
+    <link rel="preload" href="Assets/flower.png" as="image">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
@@ -38,7 +59,6 @@
 
     <audio id="background-music" loop>
         <source id="music-source-mp3" src="Assets/Kudmayi.mp3" type="audio/mpeg">
-        <source id="music-source-ogg" src="Assets/Kudmayi.ogg" type="audio/ogg">
         Your browser does not support the audio element.
     </audio>
 
@@ -47,14 +67,13 @@
         <img src="Assets/png1.png" alt="Decorative element" class="top-image">
 
         <div class="hero-content">
-            <h1 class="hero-title">Sidharth <span>&</span> Kiara</h1>
+            <h1 class="hero-title">Priyanka <span>&</span> Adarsh</h1>
 
             <p class="subtitle"
                 style="text-transform: none; font-family: 'Montserrat', sans-serif; font-size: 1.25rem; margin-top: 20px; color: #444; font-weight: 500;">
                 A beautiful journey begins! <br>
                 <span style="font-size: 1.0625rem; font-weight: 400; font-family: 'Montserrat', sans-serif;">Two souls,
-                    one
-                    heart, endless love.</span>
+                    one heart, endless love.</span>
             </p>
 
             <button id="start-button" class="luxury-btn">Enter Celebration</button>
@@ -64,12 +83,12 @@
     </div>
 
     <div id="video-screen">
-        <video id="wedding-video" autoplay muted playsinline preload="auto">
+        <video id="wedding-video" muted playsinline preload="metadata">
             <!-- Desktop Video (Video2.mp4) for screens larger than 768px -->
             <source src="Assets/Video2.mp4" type="video/mp4" media="(min-width: 768px)">
             <!-- Mobile Video (Video.mp4) for screens smaller than 768px -->
             <source src="Assets/Video.mp4" type="video/mp4" media="(max-width: 767px)">
-            <!-- Fallback for browsers that don't support media attribute on source (loads first one usually, or use JS to force) but modern browsers handle this -->
+            <!-- Fallback for browsers that don't support media attribute on source -->
             <source src="Assets/Video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -77,9 +96,10 @@
         <div class="page2-controls">
             <button id="mute-unmute-video-screen" class="control-button" title="Mute Music" aria-label="Mute Music"><i
                     class="fa-solid fa-volume-high"></i></button>
-            <!-- DEV TEMP -->
-            <!-- <button id="dev-skip-button" class="control-button" title="Skip Video (Dev)" aria-label="Skip Video"
-                style="background: rgba(255, 0, 0, 0.7); width: auto; padding: 0 15px; border-radius: 20px; font-size: 0.8rem; font-family: sans-serif;">Skip</button> -->
+            <button id="skip-video-btn" class="control-button" title="View Invitation" aria-label="Skip to Invitation"
+                style="display: none;">
+                <span>Invitation</span> <i class="fa-solid fa-angles-right"></i>
+            </button>
         </div>
 
     </div>
@@ -100,25 +120,37 @@
                 <p class="ganesh-text">|| Shree Ganeshay Namah ||</p>
             </div>
 
-            <div class="typewriter-wrapper">
-                <div class="typewriter-text">You are cordially invited along with your family to bless the wedding of
+            <div class="invitation-intro">
+                <div class="typewriter-wrapper">
+                    <div class="typewriter-text">You are cordially invited along with your family to celebrate & bless
+                        the wedding of</div>
                 </div>
             </div>
 
-            <h1 class="hero-title">
-                <span class="name-slide-left">Sidharth Gupta</span>
-                <span class="parent-details">(S/o Mr. Sunil Gupta & Mrs. Rimma Gupta)</span>
-                <span class="separator-with">with</span>
-                <span class="name-slide-right">Kiara Gupta</span>
-                <span class="parent-details">(D/o Mr. Jagdeep Gupta & Mrs. Disha Gupta)</span>
+            <!-- Couple Script Typography Section -->
+            <h1 class="hero-title main-couple-title">
+                <span class="couple-name name-slide-left">Priyanka Sanu</span>
+                <span class="parent-details">(D/o Mrs. Archana Gupta & Mr. Vinay Kumar Gupta)</span>
+
+                <div class="couple-separator">
+                    <div class="separator-infinity"><i class="fa-solid fa-infinity"></i></div>
+                    <div class="separator-row">
+                        <span class="separator-forever">FOREVER WITH</span>
+                    </div>
+                </div>
+
+                <span class="couple-name name-slide-right">Adarsh Sinha</span>
+                <span class="parent-details">(S/o Mrs. Sushma Sinha & Late Girish Kumar Sinha)</span>
             </h1>
-            <div class="separator-with" style="font-size: 4rem;">on</div>
+
+            <div class="separator-on">on</div>
+
             <div class="date-display">
-                <div class="date-side">APR</div>
-                <div class="date-center">15</div>
+                <div class="date-side">DEC</div>
+                <div class="date-center">05</div>
                 <div class="date-side">2026</div>
             </div>
-            <div class="day-name">Wednesday</div>
+            <div class="day-name">Saturday</div>
         </header>
 
         <!-- Custom Countdown Section -->
@@ -132,7 +164,7 @@
             <!-- LogWork Countdown Widget -->
             <div class="widget-wrapper">
                 <a href="https://logwork.com/countdown-timer" class="countdown-timer" data-timezone="Asia/Kolkata"
-                    data-textcolor="#transparent" data-date="2026-04-15 15:00" data-digitscolor="#8c0f5f"
+                    data-textcolor="#transparent" data-date="2026-12-05 18:30" data-digitscolor="#8c0f5f"
                     data-background="#ffffff" data-unitscolor="#ffffff00">.</a>
                 <script src="https://cdn.logwork.com/widget/countdown.js"></script>
                 <div class="custom-labels">
@@ -152,138 +184,134 @@
             <div class="profiles-container">
                 <!-- Groom Profile -->
                 <div class="profile-card">
-                    <img src="Assets/image1.jpg" alt="Sidharth" class="profile-img">
+                    <img src="Assets/image1.jpg" alt="Adarsh" class="profile-img" loading="lazy">
                     <div class="profile-overlay"></div>
                     <div class="profile-info">
-                        <h3 class="profile-name">Sidharth</h3>
-                        <p class="profile-hashtags">#handsome #caring #ambitious #charming</p>
+                        <h3 class="profile-name">Adarsh</h3>
+                        <p class="profile-hashtags">#ambitious #charming #kindhearted #caring</p>
                     </div>
                 </div>
 
                 <!-- Bride Profile -->
                 <div class="profile-card">
-                    <img src="Assets/image2.jpg" alt="Kiara" class="profile-img">
+                    <img src="Assets/image2.jpg" alt="Priyanka" class="profile-img" loading="lazy">
                     <div class="profile-overlay"></div>
                     <div class="profile-info">
-                        <h3 class="profile-name">Kiara</h3>
-                        <p class="profile-hashtags">#beautiful #adorable #outgoing #kindhearted</p>
+                        <h3 class="profile-name">Priyanka</h3>
+                        <p class="profile-hashtags">#graceful #loving #radiant #kindhearted</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Info Columns Container (Schedule & Venue) -->
-        <div class="info-columns">
-            <section class="schedule">
-                <h2>Event Schedule</h2>
-                <p><strong>Mehndi & Sangeet:</strong></p>
-                <p>07:00 PM onwards at Gol Bagicha Residence.</p>
-                <p style="font-size: 1rem;">Sangeet under the stars-let's make it unforgettable.</p>
-                <br>
-                <p><strong>Wedding Ceremony:</strong></p>
-                <p>7:00 PM onwards at Sukhdeo Clarks Inn</p>
-                <p style="font-size: 1rem;">Join us & bless us as we begin our new journey together.</p>
-            </section>
+        <!-- Wedding Schedule Section -->
+        <section class="karyakram-section" id="karyakram">
+            <h2>Wedding Schedule</h2>
+            <p class="section-subtitle">Auspicious Festivities & Celebrations</p>
 
-            <section class="venue">
-                <h2>Wedding Venue</h2>
-                <p>JW Marriott Hotel Kolkata</p>
+            <div class="karyakram-grid">
+                <!-- Ceremony 1 -->
+                <div class="karyakram-card">
+                    <div class="karyakram-img-wrapper">
+                        <img src="Assets/event_haldi.jpg" alt="Mandap & Haldi" class="karyakram-img" loading="lazy">
+                    </div>
+                    <h3 class="karyakram-title">Mandap & Haldi</h3>
+                    <div class="karyakram-date-badge">03 December 2026</div>
+                    <div class="karyakram-day">Thursday</div>
+                    <p class="karyakram-desc">Sacred turmeric ritual, holy blessings, and ceremonial mandap
+                        consecration.</p>
+                </div>
+
+                <!-- Ceremony 2 -->
+                <div class="karyakram-card">
+                    <div class="karyakram-img-wrapper">
+                        <img src="Assets/event_mehndi.jpg" alt="Mehndi & Sangeet" class="karyakram-img" loading="lazy">
+                    </div>
+                    <h3 class="karyakram-title">Mehndi & Sangeet</h3>
+                    <div class="karyakram-date-badge">04 December 2026</div>
+                    <div class="karyakram-day">Friday</div>
+                    <p class="karyakram-desc">An enchanting evening of vibrant henna, soulful music, dance, and festive
+                        joy.</p>
+                </div>
+
+                <!-- Ceremony 3 -->
+                <div class="karyakram-card">
+                    <div class="karyakram-img-wrapper">
+                        <img src="Assets/event_wedding.jpg" alt="Baraat & Wedding" class="karyakram-img" loading="lazy">
+                    </div>
+                    <h3 class="karyakram-title">Baraat & Wedding</h3>
+                    <div class="karyakram-date-badge">05 December 2026</div>
+                    <div class="karyakram-day">Saturday</div>
+                    <p class="karyakram-desc">Grand welcome of the Baraat, garland exchange (Varmala), and sacred
+                        wedding vows.</p>
+                </div>
+
+                <!-- Ceremony 4: Preetibhoj -->
+                <div class="karyakram-card">
+                    <div class="karyakram-img-wrapper">
+                        <img src="Assets/event_feast.jpg" alt="Wedding Feast" class="karyakram-img" loading="lazy">
+                    </div>
+                    <h3 class="karyakram-title">Wedding Feast</h3>
+                    <div class="karyakram-date-badge">05 December 2026</div>
+                    <div class="karyakram-day">Saturday • 6:30 PM Onwards</div>
+                    <p class="karyakram-desc"><strong>Venue:</strong> Janakpuri Palace<br><strong>Time:</strong> From
+                        6:30 PM onwards till your arrival.</p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Venue Section -->
+        <section class="venue" id="venue">
+            <h2>Wedding Venue</h2>
+            <p class="section-subtitle">Ceremony & Reception Location</p>
+
+            <div class="venue-details-box">
+                <h3 class="venue-name-main">Janakpuri Palace</h3>
+                <p class="venue-address-block">
+                    <i class="fa-solid fa-location-dot"
+                        style="color: #8c0f5f; font-size: 1.25rem; margin-right: 8px;"></i>
+                    <strong>Opposite LIC Office, Jasoiya More, Aurangabad, Bihar - 824101</strong>
+                </p>
+
+                <a href="https://www.google.com/maps?cid=10146383443232269891&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAMYASAF"
+                    target="_blank" class="btn-directions">
+                    <i class="fa-solid fa-diamond-turn-right"></i>
+                    <span>Get Directions</span>
+                </a>
 
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14739.669692319663!2d88.38953684609224!3d22.544765887419942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02769db9e49f61%3A0xa2117593c10c8066!2sJW%20Marriott%20Hotel%20Kolkata!5e0!3m2!1sen!2sin!4v1768498730257!5m2!1sen!2sin"
-                    width="600" height="450" style="border:0; opacity: 0; transition: opacity 1s;" allowfullscreen=""
-                    loading="lazy" onload="this.style.opacity='1'" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </section>
-        </div>
-
-        <section class="love-story">
-            <h2>Our Love Story</h2>
-            <div class="timeline-container">
-                <div class="timeline-line"></div>
-
-                <!-- Item 1: 2020 (Image Left, Text Right) -->
-                <div class="timeline-item item-left">
-                    <div class="timeline-img-box">
-                        <img src="Assets/first.jpg" alt="First Meeting" class="story-img">
-                    </div>
-                    <div class="timeline-content">
-                        <span class="story-year">2020</span>
-                        <h3 class="story-title">First Meeting</h3>
-                        <p class="story-desc">Met through a shared best friend.</p>
-                    </div>
-                </div>
-
-                <!-- Item 2: 2021 (Text Left, Image Right) -->
-                <div class="timeline-item item-right">
-                    <div class="timeline-content">
-                        <span class="story-year">2021</span>
-                        <h3 class="story-title">First Date</h3>
-                        <p class="story-desc">Special memories, grew closer.</p>
-                    </div>
-                    <div class="timeline-img-box">
-                        <img src="Assets/date.jpg" alt="First Date" class="story-img">
-                    </div>
-                </div>
-
-                <!-- Item 3: 2022 (Image Left, Text Right) -->
-                <div class="timeline-item item-left">
-                    <div class="timeline-img-box">
-                        <img src="Assets/chap.jpg" alt="New Chapter" class="story-img">
-                    </div>
-                    <div class="timeline-content">
-                        <span class="story-year">2022</span>
-                        <h3 class="story-title">New Chapter</h3>
-                        <p class="story-desc">Saw each other less after job changes.</p>
-                    </div>
-                </div>
-
-                <!-- Item 4: 2023 (Text Left, Image Right) -->
-                <div class="timeline-item item-right">
-                    <div class="timeline-content">
-                        <span class="story-year">2023</span>
-                        <h3 class="story-title">Family Bond</h3>
-                        <p class="story-desc">Introduced families, strengthened bond.</p>
-                    </div>
-                    <div class="timeline-img-box">
-                        <img src="Assets/family.jpg" alt="Family Bond" class="story-img">
-                    </div>
-                </div>
-
-                <!-- Item 5: 2024 (Image Left, Text Right) -->
-                <div class="timeline-item item-left">
-                    <div class="timeline-img-box">
-                        <img src="Assets/prop.jpg" alt="Proposal Day" class="story-img">
-                    </div>
-                    <div class="timeline-content">
-                        <span class="story-year">2024</span>
-                        <h3 class="story-title">Proposal Day</h3>
-                        <p class="story-desc">Sealed commitment with a proposal.</p>
-                    </div>
-                </div>
-
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3622.7779349084403!2d84.342627188855!3d24.76880190000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398cff756e92d115%3A0x8ccf31fbd8c3a643!2sJanakpuri%20Palace!5e0!3m2!1sen!2sin!4v1793178293943!5m2!1sen!2sin"
+                    width="100%" height="400" style="border:0; border-radius: 16px; display: block; margin: 0 auto;"
+                    allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
         </section>
 
 
+
+        <!-- Pre-Wedding Album Section -->
         <section class="album-section">
             <h2>PRE WEDDING ALBUM</h2>
 
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="Assets/1.jpg" alt="Pre-wedding moment 1"></div>
-                    <div class="swiper-slide"><img src="Assets/2.jpg" alt="Pre-wedding moment 2"></div>
-                    <div class="swiper-slide"><img src="Assets/3.jpg" alt="Pre-wedding moment 3"></div>
-                    <div class="swiper-slide"><img src="Assets/4.jpg" alt="Pre-wedding moment 4"></div>
-                    <div class="swiper-slide"><img src="Assets/5.jpg" alt="Pre-wedding moment 5"></div>
-                    <div class="swiper-slide"><img src="Assets/6.jpg" alt="Pre-wedding moment 6"></div>
-                    <div class="swiper-slide"><img src="Assets/7.jpg" alt="Pre-wedding moment 7"></div>
-                    <div class="swiper-slide"><img src="Assets/8.jpg" alt="Pre-wedding moment 8"></div>
-                    <div class="swiper-slide"><img src="Assets/9.jpg" alt="Pre-wedding moment 9"></div>
-                    <div class="swiper-slide"><img src="Assets/10.jpg" alt="Pre-wedding moment 10"></div>
+                    <div class="swiper-slide"><img src="Assets/1.jpg" alt="Pre-wedding moment 1" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="Assets/2.jpg" alt="Pre-wedding moment 2" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="Assets/3.jpg" alt="Pre-wedding moment 3" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="Assets/4.jpg" alt="Pre-wedding moment 4" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="Assets/5.jpg" alt="Pre-wedding moment 5" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="Assets/6.jpg" alt="Pre-wedding moment 6" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="Assets/7.jpg" alt="Pre-wedding moment 7" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="Assets/8.jpg" alt="Pre-wedding moment 8" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="Assets/9.jpg" alt="Pre-wedding moment 9" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="Assets/10.jpg" alt="Pre-wedding moment 10" loading="lazy"></div>
                 </div>
             </div>
         </section>
 
+        <!-- Our Moments Video Section (Temporarily Hidden) -->
+        <!--
         <section class="video-section">
             <h2>Our Moments</h2>
 
@@ -314,40 +342,36 @@
                 </div>
             </div>
         </section>
+        -->
 
+        <!-- Cordial Invitation & RSVP Section -->
+        <section class="family-section" id="family">
+            <h2>Cordial Invitation</h2>
 
-        <section class="venue">
-            <h2>Contact</h2>
+            <div class="host-rsvp-card">
+                <h3 class="host-name">Shri Vinay Kumar Gupta</h3>
+                <div class="host-firm">Firm: Anand Brokers</div>
+                <p class="host-address">
+                    <i class="fa-solid fa-location-dot" style="color: #8c0f5f; margin-right: 6px;"></i>
+                    Anand Kuteer, Nawadih Road, Ward No. 18, Aurangabad, Bihar
+                </p>
 
-            <p><strong>Sidharth's Contact:</strong></p>
-
-            <div class="contact-icons">
-
-                <a href="tel:+917050875950" title="Call Sidharth"
-                    style="text-decoration: none; transition: transform 0.3s; display: flex; flex-direction: row; align-items: center; gap: 15px;"
-                    onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <i class="fa-solid fa-phone" style="font-size: 2rem; color: #444;"></i>
-                    <span
-                        style="color: #444; font-family: 'Montserrat', sans-serif; font-size: 1.1rem;">7050875950</span>
-                </a>
-
-                <a href="https://wa.me/917050875950" target="_blank" title="WhatsApp Sidharth"
-                    style="text-decoration: none; transition: transform 0.3s; display: flex; flex-direction: row; align-items: center; gap: 15px;"
-                    onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 2.2rem; color: #25D366;"></i>
-                    <span style="color: #444; font-family: 'Montserrat', sans-serif; font-size: 1.1rem;">WhatsApp</span>
-                </a>
-
+                <div class="contact-buttons-container">
+                    <a href="tel:+919931499571" class="contact-pill phone" title="Call Vinay Kumar Gupta">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+91 9931499571</span>
+                    </a>
+                    <a href="https://wa.me/919931499571" target="_blank" class="contact-pill whatsapp"
+                        title="WhatsApp Vinay Kumar Gupta">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>WhatsApp 9931499571</span>
+                    </a>
+                    <a href="tel:+918340772797" class="contact-pill phone" title="Call 8340772797">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+91 8340772797</span>
+                    </a>
+                </div>
             </div>
-
-            <p style="margin-top: 20px;"><strong>Home Address:</strong><br>
-                <a href="https://maps.app.goo.gl/ZJV9HF5E8RGAzCAD7" target="_blank"
-                    style="text-decoration: none; color: inherit; transition: color 0.3s;"
-                    onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='inherit'">
-                    Nayapatty, AP Block, Sector V, Bidhannagar, Kolkata, West Bengal 700102
-                </a>
-            </P>
-
         </section>
 
         <footer>
@@ -356,11 +380,13 @@
                 <i class="fa-solid fa-right-from-bracket exit-icon"></i>
             </button>
             <p class="thank-you-text">Thank You</p>
-            <p class="footer-msg">Your presence and well wishes mean the world to us.</p><br>
+            <p class="footer-msg">Your gracious presence and heartfelt blessings will fill our celebration with joy.</p>
+            <br>
             <p
                 style="font-size: 0.9375rem; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                <a href="https://nirmalwebworks.web.app" target="_blank" style="text-decoration: none; color: inherit;">
-                    <b>© 2026 <span class="gradient-brand-text">NirmalWebWorks</span></b>
+                <a href="https://qubektechnologies.in" target="_blank" rel="noopener noreferrer"
+                    style="text-decoration: none; color: inherit;">
+                    <b>Crafted by <span class="gradient-brand-text">Qubek Technologies</span></b>
                 </a>
             </p>
         </footer>

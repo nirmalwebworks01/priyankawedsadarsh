@@ -1,28 +1,15 @@
-// --- NEW PRELOADER LOGIC ---
+// --- PRELOADER LOGIC ---
 const preloader = document.getElementById('preloader');
 
-window.onload = function () {
-    // Explicitly preload the heavy background image
-    const bgImage = new Image();
-    bgImage.src = 'Assets/hand.avif';
-
-    bgImage.onload = function () {
-        // Hide loader only after this specific image is ready (in addition to window.onload)
+function hidePreloader() {
+    if (preloader && !preloader.classList.contains('hidden')) {
         preloader.classList.add('hidden');
-    };
-
-    bgImage.onerror = function () {
-        console.warn("Background image failed to load, hiding preloader anyway.");
-        preloader.classList.add('hidden');
-    };
-
-    // Safety timeout in case image loading hangs
-    setTimeout(() => {
-        if (!preloader.classList.contains('hidden')) {
-            preloader.classList.add('hidden');
-        }
-    }, 5000);
+    }
 }
+
+window.addEventListener('load', hidePreloader);
+// Safety timeout in case any external widget delays load event
+setTimeout(hidePreloader, 1500);
 // --- END PRELOADER LOGIC ---
 
 // --- CONFIGURATION ---
@@ -62,6 +49,11 @@ function navigateToVideoPage() {
     ];
     elementsToAnimate.forEach(el => el && el.classList.add('exiting'));
     // --- END NEW PART ---
+
+    // Stop background particle loop to free CPU & GPU
+    if (typeof stopParticleAnimation === 'function') {
+        stopParticleAnimation();
+    }
 
     // Delay the original navigation to let the new animation play
     setTimeout(() => {
@@ -139,9 +131,12 @@ function exitExperience() {
 // --- EVENT LISTENERS ---
 const devSkipButton = document.getElementById('dev-skip-button'); // DEV SKIP
 if (devSkipButton) devSkipButton.addEventListener('click', navigateToMainPage);
+const skipVideoBtn = document.getElementById('skip-video-btn');
+if (skipVideoBtn) skipVideoBtn.addEventListener('click', navigateToMainPage);
 
 startButton.addEventListener('click', navigateToVideoPage);
-weddingVideo.addEventListener('ended', navigateToMainPage); // ADDED: Auto-navigate when video ends
+weddingVideo.addEventListener('ended', navigateToMainPage); // Auto-navigate when video ends
+weddingVideo.addEventListener('click', navigateToMainPage); // Tap video to proceed
 muteVideoScreenButton.addEventListener('click', toggleMusicMute);
 muteMainContentButton.addEventListener('click', toggleMusicMute);
 if (exitMainContentButton) exitMainContentButton.addEventListener('click', exitExperience);
@@ -152,10 +147,26 @@ if (muteVideoScreenButton) {
 }
 
 // --- MAIN INITIALIZATION FUNCTION (Called when P3 becomes visible) ---
+let isMainPageInitialized = false;
 function initializeMainPage() {
+    if (isMainPageInitialized) return;
+    isMainPageInitialized = true;
 
-    // 1. COUNTDOWN LOGIC (REPLACED WITH WIDGET)
-    // The LogWork widget handles the countdown automatically via the script tag in HTML.
+    // 0. COUPLE NAMES ENTRANCE SLIDE (Plays dynamically when entering invitation)
+    const brideEl = document.querySelector('.main-couple-title .name-slide-left');
+    const groomEl = document.querySelector('.main-couple-title .name-slide-right');
+    if (brideEl) {
+        brideEl.style.animation = 'none';
+        void brideEl.offsetWidth;
+        brideEl.style.animation = 'slideInBride 1.2s cubic-bezier(0.25, 1, 0.5, 1) both, gradient-move 3.5s linear infinite';
+    }
+    if (groomEl) {
+        groomEl.style.animation = 'none';
+        void groomEl.offsetWidth;
+        groomEl.style.animation = 'slideInGroom 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.15s both, gradient-move 3.5s linear infinite';
+    }
+
+    // 1. COUNTDOWN LOGIC (LogWork Widget handles countdown automatically)
 
     // 2. SECTION ANIMATION (Intersection Observer)
     const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
@@ -176,47 +187,41 @@ function initializeMainPage() {
         sectionObserver.observe(section);
     });
 
-    // 3. SCROLL HINT LOGIC
+    // 3. SCROLL HINT LOGIC: Show after 5 seconds only if user hasn't scrolled
     const scrollHint = document.getElementById('scroll-hint-popup');
     if (scrollHint) {
-        // Show immediately
-        scrollHint.classList.add('visible');
+        let hasUserScrolled = false;
+        let hintTimer = null;
 
-        // Hide after 3 seconds
-        setTimeout(() => {
-            scrollHint.classList.remove('visible');
-        }, 3000);
+        const onUserScroll = () => {
+            if (window.scrollY > 20) {
+                hasUserScrolled = true;
+                if (hintTimer) {
+                    clearTimeout(hintTimer);
+                    hintTimer = null;
+                }
+                scrollHint.classList.remove('visible');
+                window.removeEventListener('scroll', onUserScroll);
+            }
+        };
+
+        // Listen for user scrolling
+        window.addEventListener('scroll', onUserScroll, { passive: true });
+
+        // Show after 5 seconds ONLY if user has not scrolled yet
+        hintTimer = setTimeout(() => {
+            if (!hasUserScrolled && window.scrollY <= 20) {
+                scrollHint.classList.add('visible');
+
+                // Auto-fade out after 4 seconds if user still remains idle
+                setTimeout(() => {
+                    scrollHint.classList.remove('visible');
+                }, 4000);
+            }
+        }, 5000);
     }
 
-    // 4. TIMELINE SCROLL ANIMATION (Re-triggers on scroll)
-    const timelineItems = document.querySelectorAll('.timeline-item');
 
-    const timelineObserverOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.2 // Trigger when 20% visible
-    };
-
-    const timelineObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-            } else {
-                // Remove class when out of view to re-trigger animation
-                entry.target.classList.remove('in-view');
-            }
-        });
-    }, timelineObserverOptions);
-
-    timelineItems.forEach(item => {
-        timelineObserver.observe(item);
-    });
-
-    // 5. PROFILE ANIMATION (Same logic)
-    const profileElements = document.querySelectorAll('.profile-name, .profile-hashtags, .name-slide-left, .name-slide-right');
-    profileElements.forEach(el => {
-        timelineObserver.observe(el);
-    });
 
     // 5.1 FOOTER ANIMATION
     const footerText = document.querySelector('.thank-you-text');
@@ -257,22 +262,24 @@ function initializeMainPage() {
     });
 
     // 7. VIDEO SWIPER INITIALIZATION
-    var videoSwiper = new Swiper(".videoSwiper", {
-        effect: "coverflow",
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: "auto",
-        rewind: true, // Use rewind instead of loop for video simplicity
-        coverflowEffect: {
-            rotate: 20,
-            stretch: 0,
-            depth: 350,
-            modifier: 1,
-            slideShadows: true,
-            scale: 1,
-        },
-        // No autoplay for videos
-    });
+    if (document.querySelector('.videoSwiper')) {
+        var videoSwiper = new Swiper(".videoSwiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            rewind: true, // Use rewind instead of loop for video simplicity
+            coverflowEffect: {
+                rotate: 20,
+                stretch: 0,
+                depth: 350,
+                modifier: 1,
+                slideShadows: true,
+                scale: 1,
+            },
+            // No autoplay for videos
+        });
+    }
 
     // 8. VIDEO AUDIO MANAGEMENT (UPDATED)
     const videoWrappers = document.querySelectorAll('.video-wrapper');
@@ -329,19 +336,15 @@ function initializeMainPage() {
     // 9. HEADER SCROLL LOGIC (Mute Button Visibility)
     const page3Controls = document.querySelector('.page3-controls');
     if (page3Controls) {
+        let isControlsHidden = false;
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                // If scrolled down more than 50px, fade out
-                page3Controls.style.opacity = '0';
-                page3Controls.style.transition = 'opacity 0.3s ease';
-                // Also ensure buttons aren't clickable
-                Array.from(page3Controls.children).forEach(child => child.style.pointerEvents = 'none');
-            } else {
-                // If at top, fade in
-                page3Controls.style.opacity = '1';
-                Array.from(page3Controls.children).forEach(child => child.style.pointerEvents = 'auto');
+            const shouldHide = window.scrollY > 50;
+            if (shouldHide !== isControlsHidden) {
+                isControlsHidden = shouldHide;
+                page3Controls.style.opacity = shouldHide ? '0' : '1';
+                page3Controls.style.pointerEvents = shouldHide ? 'none' : 'auto';
             }
-        });
+        }, { passive: true });
     }
 }
 
@@ -400,13 +403,24 @@ if (canvas) {
     // Initialize particles
     for (let i = 0; i < 80; i++) particles.push(new Particle());
 
+    let isParticleAnimating = true;
+    let animationFrameId = null;
+
     function animate() {
+        if (!isParticleAnimating) return;
         ctx.clearRect(0, 0, w, h);
         particles.forEach(p => {
             p.update();
             p.draw();
         });
-        requestAnimationFrame(animate);
+        animationFrameId = requestAnimationFrame(animate);
     }
     animate();
+
+    window.stopParticleAnimation = function () {
+        isParticleAnimating = false;
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+        }
+    };
 }
